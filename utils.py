@@ -21,7 +21,7 @@ def fill_circle(x, y, r) -> List[List]:
 def midpoint_circle_draw(x, y, r) -> List[List]:
     """
     Function loops through every pixel in pygame window. If the pixel's coordinates squared and added together equal 1, it is added to the list of pixels, which is returned.
-    NOTE: Because the coordinates are usualy not exactly 0, there is also a list, which contains the deviation.
+    NOTE: Because the added coordinates are usualy not exactly 0, there is also a list, which contains the deviation.
     """
     width = x
     height = y
