@@ -1,0 +1,21 @@
+if event.type == pygame.KEYDOWN:
+    print('q')
+    if event.type == K_w:
+        print('w')
+    if event.type == K_s:
+        print('s')
+    if event.type == K_a:
+        print('a')
+    if event.type == K_d:
+        print('d')
+
+if event.type == pygame.KEYDOWN:
+    print('q')
+    if event.key == K_w:
+        print('w')
+    if event.key  == K_s:
+        print('s')
+    if event.key  == K_a:
+        print('a')
+    if event.key  == K_d:
+        print('d')
