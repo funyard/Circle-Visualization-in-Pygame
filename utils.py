@@ -34,3 +34,14 @@ def midpoint_circle_draw(x, y, r) -> List[List]:
                 list_of_coords.append([x, y])
 
     return list_of_coords
+
+
+def is_over(rect, pos):
+    """
+    function takes a tuple of (x, y) coords and a pygame.Rect object
+    returns True if the given rect overlaps the given coords
+    else it returns False
+    """
+    return True if rect.collidepoint(pos[0], pos[1]) else False
+
+
