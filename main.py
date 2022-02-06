@@ -1,5 +1,3 @@
-#!/usr/bin/pypy3
-
 from textwrap import fill
 import pygame
 import sys
@@ -54,10 +52,6 @@ def main() -> None:
     screen.blit(filled_button_text, (150 + 13, 300 + 40))
     radius_input_field_rect.draw()
 
-    # Creates lists with coordinates for each circle
-    list_of_rect_coords = utils.midpoint_circle_draw(WIDTH, HEIGHT, 200)
-    list_of_filled_rect_coords = utils.fill_circle(WIDTH, HEIGHT, 200)
-
     # Event loop
     while True:
         # For quiting
@@ -73,11 +67,14 @@ def main() -> None:
                     try:
                         if filled == None:
                             filled = True
-                        radius = radius_input_field_rect.string_of_keys
-                        if int(radius) != type(int):
+
+                        try:
+                            radius = int(radius_input_field_rect.string_of_keys)
+                        except ValueError:
                             radius = 200
 
                         screen.blit(background, (0, 0))
+                        print(radius)
                         if filled:
                             list_of_filled_rect_coords = utils.fill_circle(
                                 WIDTH, HEIGHT, int(radius)
@@ -87,7 +84,7 @@ def main() -> None:
                                     screen, BLACK, pygame.Rect(el[0], el[1], 1, 1)
                                 )
                         if not filled:
-                            list_of_rect_coords = utils.midpoint_circle_draw(
+                            list_of_rect_coords = utils.better_midpoint_circle_draw(
                                 WIDTH, HEIGHT, int(radius)
                             )
                             for el in list_of_rect_coords:
@@ -111,26 +108,11 @@ def main() -> None:
 
             if event.type == pygame.KEYDOWN:
 
-                if event.key == pygame.K_RETURN:
-                    radius = radius_input_field_rect.string_of_keys
-                    radius_input_field_rect.clear()
-
                 if event.key == pygame.K_BACKSPACE:
-                    print(radius_input_field_rect.string_of_keys)
-                    radius_input_field_rect.clear_char()
-                    print(radius_input_field_rect.string_of_keys)
+                    radius_input_field_rect.clear()
 
                 if event.unicode in string.digits:
                     radius_input_field_rect.update(event.unicode)
-
-        # Loops through every coordinates from list to draw a hollow circle
-
-        # TODO Create a way to choose which circle to draw
-
-        # Loops through every coordinates from list to draw a filled circle
-
-        # for el in list_of_filled_rect_coords:
-        #    pygame.draw.rect(screen, BLACK, pygame.Rect(int(el[0]), int(el[1]), 1, 1))
 
         pygame.display.update()
 
