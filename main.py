@@ -1,4 +1,5 @@
-from textwrap import fill
+#!python
+
 import pygame
 import sys
 import utils
@@ -20,7 +21,6 @@ def main() -> None:
     BUTTON_FONT = pygame.font.Font(None, 34)
 
     # Initialise screen
-
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Midpoint circle visualization")
 
@@ -34,6 +34,7 @@ def main() -> None:
     hollow_circle_button = pygame.Rect(450, 300, 200, 100)
     radius_input_field_rect = classes.InputBox(screen, 150, 200, 500, 60, BLACK)
 
+    # Draw all fonts
     title_text = TITLE_FONT.render("Midpoint circle visualization", True, BLACK)
     start_button_text = BUTTON_FONT.render("START", True, WHITE)
     filled_button_text = BUTTON_FONT.render("FILLED CIRCLE", True, WHITE)
@@ -77,7 +78,7 @@ def main() -> None:
                         print(radius)
                         if filled:
                             list_of_filled_rect_coords = utils.fill_circle(
-                                WIDTH, HEIGHT, int(radius)
+                                WIDTH, HEIGHT, radius
                             )
                             for el in list_of_filled_rect_coords:
                                 pygame.draw.rect(
@@ -85,14 +86,14 @@ def main() -> None:
                                 )
                         if not filled:
                             list_of_rect_coords = utils.better_midpoint_circle_draw(
-                                WIDTH, HEIGHT, int(radius)
+                                WIDTH, HEIGHT, radius
                             )
                             for el in list_of_rect_coords:
                                 pygame.draw.rect(
-                                    screen, BLACK, pygame.Rect(el[0], el[1], 2, 2)
+                                    screen, BLACK, pygame.Rect(el[0], el[1], 1, 1)
                                 )
                     except Exception as e:
-                        print(e)
+                        print("Exception: ", e)
 
                 # Over filled circle button
                 if utils.is_over(
