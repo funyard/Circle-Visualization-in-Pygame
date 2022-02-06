@@ -6,6 +6,39 @@ import utils
 import string
 import classes
 
+# from pygame_widgets.button import Button
+# import pygame_widgets
+
+
+#! Not implemented yet!
+"""
+def start_button_func():
+    filled = False
+    try:
+        if filled == None:
+            filled = True
+
+        try:
+            radius = int(radius_input_field_rect.string_of_keys)
+        except ValueError:
+            radius = 200
+
+        screen.blit(background, (0, 0))
+        print(radius)
+        if filled:
+            list_of_filled_rect_coords = utils.fill_circle(WIDTH, HEIGHT, radius)
+            for el in list_of_filled_rect_coords:
+                pygame.draw.rect(screen, BLACK, pygame.Rect(el[0], el[1], 1, 1))
+        if not filled:
+            list_of_rect_coords = utils.better_midpoint_circle_draw(
+                WIDTH, HEIGHT, radius
+            )
+            for el in list_of_rect_coords:
+                pygame.draw.rect(screen, BLACK, pygame.Rect(el[0], el[1], 1, 1))
+    except Exception as e:
+        print("Exception: ", e)
+"""
+
 
 def main() -> None:
 
@@ -30,6 +63,22 @@ def main() -> None:
 
     # Create main menu
     start_button = pygame.Rect(400 - 200 / 2, 440, 200, 100)
+    #! Not implemented yet!
+    """start_button = Button(
+        screen,
+        400 - 200 / 2,
+        440,
+        200,
+        100,
+        text="START",
+        fontsize=34,
+        margin=20,
+        inactiveColour=(255, 0, 0),
+        pressedColour=(0, 255, 0),
+        radius=20,
+        onClick=start_button_func,
+    )
+    """
     filled_circle_button = pygame.Rect(150, 300, 200, 100)
     hollow_circle_button = pygame.Rect(450, 300, 200, 100)
     radius_input_field_rect = classes.InputBox(screen, 150, 200, 500, 60, BLACK)
@@ -64,6 +113,7 @@ def main() -> None:
                 mouse_coords = pygame.mouse.get_pos()
 
                 # Over start button
+
                 if utils.is_over(start_button, (mouse_coords[0], mouse_coords[1])):
                     try:
                         if filled == None:
@@ -116,6 +166,7 @@ def main() -> None:
                     radius_input_field_rect.update(event.unicode)
 
         pygame.display.update()
+        # pygame_widgets.update(event)
 
 
 if __name__ == "__main__":

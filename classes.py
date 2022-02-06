@@ -35,3 +35,4 @@ class InputBox:
         if clear_string:
             self.string_of_keys = ""
         pygame.display.update()
+            
