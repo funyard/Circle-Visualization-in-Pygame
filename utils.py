@@ -1,4 +1,5 @@
 from typing import List
+import pygame
 
 
 def fill_circle(x, y, r) -> List[List]:
@@ -36,6 +37,7 @@ def midpoint_circle_draw(x, y, r) -> List[List]:
 
     return list_of_coords
 
+
 # CREDIT: https://www.geeksforgeeks.org/mid-point-circle-drawing-algorithm/
 def better_midpoint_circle_draw(x_centre, y_centre, r):
     x_centre = x_centre / 2
@@ -43,60 +45,56 @@ def better_midpoint_circle_draw(x_centre, y_centre, r):
     x = r
     y = 0
     list_of_points = []
-     
+
     # Printing the initial point the
     # axes after translation
-     
+
     # When radius is zero only a single
     # point be printed
-    if (r > 0) :
-        
-        list_of_points.append((x + x_centre,
-                  -y + y_centre))
-        list_of_points.append((y + x_centre,
-                  x + y_centre))
+    if r > 0:
+
+        list_of_points.append((x + x_centre, -y + y_centre))
+        list_of_points.append((y + x_centre, x + y_centre))
         list_of_points.append((-y + x_centre, x + y_centre))
-     
+
     # Initialising the value of P
     P = 1 - r
- 
+
     while x > y:
-     
+
         y += 1
-         
+
         # Mid-point inside or on the perimeter
         if P <= 0:
             P = P + 2 * y + 1
-             
+
         # Mid-point outside the perimeter
-        else:        
+        else:
             x -= 1
             P = P + 2 * y - 2 * x + 1
-         
+
         # All the perimeter points have
         # already been printed
-        if (x < y):
+        if x < y:
             break
-         
+
         # Printing the generated point its reflection
         # in the other octants after translation
-        
+
         list_of_points.append((x + x_centre, y + y_centre))
         list_of_points.append((-x + x_centre, y + y_centre))
         list_of_points.append((x + x_centre, -y + y_centre))
         list_of_points.append((-x + x_centre, -y + y_centre))
-        
-         
+
         # If the generated point on the line x = y then
         # the perimeter points have already been printed
         if x != y:
-            
+
             list_of_points.append((y + x_centre, x + y_centre))
             list_of_points.append((-y + x_centre, x + y_centre))
             list_of_points.append((y + x_centre, -x + y_centre))
             list_of_points.append((-y + x_centre, -x + y_centre))
-            
-            
+
     return list_of_points
 
 
@@ -109,3 +107,31 @@ def is_over(rect, pos):
     return True if rect.collidepoint(pos[0], pos[1]) else False
 
 
+def start_button_func(
+    radius, surface, bg, start_button, circle_type, hollow_button, filled_button
+):
+    WIDTH, HEIGHT = 800, 600
+    start_button.hide()
+    hollow_button.hide()
+    filled_button.hide()
+    try:
+        if circle_type == None:
+            circle_type = True
+
+        try:
+            radius = int(radius.string_of_keys)
+        except ValueError:
+            radius = 200
+
+        surface.blit(bg, (0, 0))
+        print(radius)
+        if circle_type:
+            list_of_filled_rect_coords = fill_circle(WIDTH, HEIGHT, radius)
+            for el in list_of_filled_rect_coords:
+                pygame.draw.rect(surface, (0, 0, 0), pygame.Rect(el[0], el[1], 1, 1))
+        if not circle_type:
+            list_of_rect_coords = better_midpoint_circle_draw(WIDTH, HEIGHT, radius)
+            for el in list_of_rect_coords:
+                pygame.draw.rect(surface, (0, 0, 0), pygame.Rect(el[0], el[1], 1, 1))
+    except Exception as e:
+        print("Exception: ", e)
