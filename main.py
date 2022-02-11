@@ -15,6 +15,7 @@ def main() -> None:
     pygame.init()
 
     def set_circle_type(value):
+        global filled
         filled = value
 
     # VARS

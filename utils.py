@@ -115,8 +115,11 @@ def start_button_func(
     hollow_button.hide()
     filled_button.hide()
     try:
-        if circle_type == None:
-            circle_type = True
+        try:
+            if circle_type == None:
+                circle_type = False
+        except NameError:
+            circle_type = False
 
         try:
             radius = int(radius.string_of_keys)
