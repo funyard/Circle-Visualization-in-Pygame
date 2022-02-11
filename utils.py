@@ -127,7 +127,6 @@ def start_button_func(
             radius = 200
 
         surface.blit(bg, (0, 0))
-        print(radius)
         if circle_type:
             list_of_filled_rect_coords = fill_circle(WIDTH, HEIGHT, radius)
             for el in list_of_filled_rect_coords:
